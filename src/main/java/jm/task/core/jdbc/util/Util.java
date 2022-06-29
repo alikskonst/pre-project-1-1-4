@@ -29,7 +29,7 @@ public class Util {
         Map<String, String> map = new HashMap<>();
         map.put("connection.driver_class", "com.mysql.cj.jdbc.Driver");
         map.put("dialect", "org.hibernate.dialect.MySQL8Dialect");
-        map.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/pre_project_114");
+        map.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/pre_project_114?useSSL=false");
         map.put("hibernate.connection.username", "root");
         map.put("hibernate.connection.password", "root");
         map.put("hibernate.current_session_context_class", "thread");
