@@ -24,8 +24,9 @@ public class UserDaoHibernateImpl implements UserDao {
             SessionFactory sessionFactory = util.getSessionFactory();
             Session session = sessionFactory.openSession();
             session.beginTransaction();
-            session.createNativeQuery("CREATE TABLE IF NOT EXISTS user (id bigint NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, last_name varchar(255) NOT NULL, age tinyint NOT NULL, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3");
+            session.createSQLQuery("CREATE TABLE IF NOT EXISTS user (id bigint NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, last_name varchar(255) NOT NULL, age tinyint NOT NULL, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3");
             session.getTransaction().commit();
+            session.close();
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
@@ -37,8 +38,9 @@ public class UserDaoHibernateImpl implements UserDao {
             SessionFactory sessionFactory = util.getSessionFactory();
             Session session = sessionFactory.openSession();
             session.beginTransaction();
-            session.createNativeQuery("DROP TABLE IF EXISTS user");
+            session.createSQLQuery("DROP TABLE IF EXISTS user");
             session.getTransaction().commit();
+            session.close();
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
@@ -55,6 +57,7 @@ public class UserDaoHibernateImpl implements UserDao {
             nativeQuery.setParameter(2, lastName);
             nativeQuery.setParameter(3, age);
             session.getTransaction().commit();
+            session.close();
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
@@ -69,6 +72,7 @@ public class UserDaoHibernateImpl implements UserDao {
             NativeQuery<Integer> query = session.createNativeQuery("DELETE FROM user WHERE id = ?", Integer.class);
             query.setParameter(1, id);
             session.getTransaction().commit();
+            session.close();
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
@@ -82,6 +86,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.beginTransaction();
             NativeQuery<User> nativeQuery = session.createNativeQuery("SELECT id, name, last_name, age FROM user", User.class);
             session.getTransaction().commit();
+            session.close();
             return nativeQuery.getResultList();
         } catch (HibernateException ex) {
             ex.printStackTrace();
@@ -97,6 +102,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.beginTransaction();
             session.createNativeQuery("DELETE FROM user");
             session.getTransaction().commit();
+            session.close();
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
