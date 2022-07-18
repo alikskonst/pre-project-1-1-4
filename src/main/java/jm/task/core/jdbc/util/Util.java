@@ -19,10 +19,7 @@ public class Util {
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(getSetting()).build();
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
         Metadata metadata = metadataSources.buildMetadata();
-        //SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
         return metadata.getSessionFactoryBuilder().build();
-        //Session session = sessionFactory.openSession();
-        //return sessionFactory.getCurrentSession();
     }
 
     private Map<String, String> getSetting() {
